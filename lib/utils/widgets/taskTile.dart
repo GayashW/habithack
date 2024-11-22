@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:habithack/utils/theme/light_mode.dart';
 
 class TaskTile extends StatelessWidget {
   final String taskName;
