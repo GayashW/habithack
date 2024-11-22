@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:habithack/utils/theme/theme_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:habithack/pages/homepage.dart';
+import 'package:habithack/utils/theme/light_mode.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,8 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: Provider.of<ThemeProvider>(context).themeData,
+      theme: ThemeDataModes().darkTheme,
+      home: const SafeArea(child: Homepage()),
     );
   }
 }
