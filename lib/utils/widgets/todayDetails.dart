@@ -45,7 +45,7 @@ class Datedetails extends StatelessWidget {
       width: 80,
       height: 120,
       decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).primaryColor.withOpacity(0.6),
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Center(
         child: Column(
@@ -58,37 +58,37 @@ class Datedetails extends StatelessWidget {
               children: [
                 Text(
                   '$day',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 22,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
                 Text(
                   suffix, // Suffix alone, no day included
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onSecondary,
                   ),
                 ),
               ],
             ),
             Text(
               month,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
             Text(
               year,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w300,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
           ],

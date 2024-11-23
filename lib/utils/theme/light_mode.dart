@@ -100,7 +100,7 @@ class ThemeDataModes {
         brightness: Brightness.dark,
         primarySwatch: createMaterialColor(const Color(0xFFD40000)),
       ).copyWith(
-        secondary: Colors.blue, // Your secondary color
+        secondary: Colors.grey, // Your secondary color
         onSecondary: Colors.white, // Text or icon color on the secondary color
       ));
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:habithack/data/database.dart';
 import 'package:habithack/utils/widgets/dialogBox.dart';
 import 'package:habithack/utils/widgets/taskTile.dart';
 import 'package:habithack/utils/widgets/todayDetails.dart';
+import 'package:hive/hive.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -11,34 +13,53 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  // List of tasks
-  List<Map<String, dynamic>> tasks = [
-    {
-      'taskName': 'Google 1',
-      'taskCompleted': false,
-    },
-    {
-      'taskName': 'Task 2',
-      'taskCompleted': true,
-    },
-  ];
+  @override
+  void initState() {
+    // If box is app for the first time, then create a database
+    if (_myBox.get("TASKLIST") == null) {
+      db.createInitialData();
+    } else {
+      // Get the data from the database
+      db.loadData();
+    }
+    super.initState();
+  }
+
+  // Reference the hive box
+  final _myBox = Hive.box("tasks");
+  TaskDatabase db = TaskDatabase();
+
+  // Text controller
+  final _controller = TextEditingController();
 
   // Checkbox clicked to update task completion
   void checkboxClicked(int index, bool taskCompleted) {
     setState(() {
-      tasks[index]['taskCompleted'] = taskCompleted;
+      db.tasksList[index][1] = taskCompleted;
     });
+    db.updateData();
+    db.recordCompletedTasks(DateTime.now());
+    print(db.completedTasksPerDay);
+    print(db.tasksCompletedCount);
   }
 
   // Delete task
   void deleteTask(int index) {
     setState(() {
-      tasks.removeAt(index); // Remove task from list
+      db.tasksList.removeAt(index); // Remove task from list
     });
+    db.updateData();
   }
 
-  // Text controller
-  final _controller = TextEditingController();
+  // Save new task
+  void saveNewTask() {
+    setState(() {
+      db.tasksList.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+    db.updateData();
+  }
 
   // Create a new task
   void createNewTask(BuildContext context) {
@@ -47,7 +68,7 @@ class _HomepageState extends State<Homepage> {
       builder: (context) {
         return MyDialogBox(
           controller: _controller,
-          onSave: () {},
+          onSave: saveNewTask,
           onCancel: () => Navigator.of(context).pop(),
         );
       },
@@ -56,15 +77,15 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => createNewTask(context),
-        elevation: 0, // Pass context here
-        child: Icon(Icons.add),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Column(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => createNewTask(context),
+          elevation: 0, // Pass context here
+          child: const Icon(Icons.add),
+        ),
+        body: Column(
           children: [
             Row(
               children: [
@@ -78,11 +99,11 @@ class _HomepageState extends State<Homepage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: tasks.length,
+                itemCount: db.tasksList.length,
                 itemBuilder: (context, i) {
                   return TaskTile(
-                    taskName: tasks[i]['taskName'],
-                    taskCompleted: tasks[i]['taskCompleted'],
+                    taskName: db.tasksList[i][0],
+                    taskCompleted: db.tasksList[i][1],
                     onChanged: (bool? newStatus) {
                       if (newStatus != null) {
                         checkboxClicked(
@@ -96,6 +117,22 @@ class _HomepageState extends State<Homepage> {
                 },
               ),
             ),
+            TextButton(
+              onPressed: () {
+                print(db.tasksCompletedCount);
+                // Calculate the sum of all the integer values in the map
+                int sum = db.tasksCompletedCount.values
+                    .fold(0, (previous, current) => previous + current);
+
+                // Output the sum
+                print("Sum of the dataset values: $sum");
+              },
+              child: Text("debug",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  )),
+            )
           ],
         ),
       ),
