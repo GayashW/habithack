@@ -21,6 +21,7 @@ class TaskTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
       child: Slidable(
         endActionPane: ActionPane(
+          extentRatio: 0.25,
           motion: const StretchMotion(),
           children: [
             SlidableAction(
@@ -28,8 +29,8 @@ class TaskTile extends StatelessWidget {
                   deleteFunction?.call(context),
               icon: Icons.delete,
               backgroundColor: Theme.of(context).brightness == Brightness.light
-                  ? const Color.fromARGB(255, 255, 63, 63)
-                  : const Color.fromARGB(255, 211, 0, 0),
+                  ? const Color(0xFFFF5959)
+                  : const Color.fromARGB(101, 255, 89, 89),
               borderRadius: BorderRadius.circular(10),
             ),
           ],
@@ -39,8 +40,8 @@ class TaskTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: taskCompleted
-                ? Theme.of(context).primaryColor.withOpacity(0.5)
-                : Theme.of(context).primaryColor.withOpacity(0.2),
+                ? Theme.of(context).primaryColor.withOpacity(0.75)
+                : Theme.of(context).primaryColor.withOpacity(0.25),
           ),
           child: Row(
             children: [

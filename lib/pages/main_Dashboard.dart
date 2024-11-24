@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:habithack/pages/homepage.dart';
 import 'package:habithack/pages/progressPage.dart';
+import 'package:habithack/utils/theme/theme_Notifier.dart';
+import 'package:provider/provider.dart';
 
 class MainDashboard extends StatefulWidget {
   const MainDashboard({super.key});
@@ -32,6 +34,42 @@ class _MainDashboardState extends State<MainDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Row(
+          children: [
+            // Empty box to take up space before the title
+            SizedBox(width: 40), // Adjust width as needed
+            Expanded(
+              child: Center(
+                child: Text(
+                  'Lets Habit_It',
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          // Toggle button to change theme
+          IconButton(
+            onPressed: () {
+              // Toggle the theme when the button is pressed
+              Provider.of<ThemeNotifier>(context, listen: false).toggleTheme();
+            },
+            icon: Icon(
+              // Change icon based on the current theme
+              Provider.of<ThemeNotifier>(context).isDarkMode
+                  ? Icons.dark_mode
+                  : Icons.light_mode,
+            ),
+          ),
+        ],
+      ),
       body: PageView(
         controller: _pageController,
         onPageChanged: onPageChange,

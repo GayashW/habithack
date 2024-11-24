@@ -19,7 +19,7 @@ MaterialColor createMaterialColor(Color color) {
 
 class ThemeDataModes {
   // Light and Dark Theme
-  final ThemeData lightTheme = ThemeData(
+  ThemeData lightTheme = ThemeData(
     fontFamily: GoogleFonts.poppins().fontFamily,
     appBarTheme: AppBarTheme(
       backgroundColor:
@@ -65,46 +65,48 @@ class ThemeDataModes {
     ),
   );
 
-  final ThemeData darkTheme = ThemeData(
-      fontFamily: GoogleFonts.poppins().fontFamily,
-      appBarTheme: AppBarTheme(
-        backgroundColor: const Color(0xFF1B1B1B),
-        titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontFamily: GoogleFonts.poppins().fontFamily,
-          fontSize: 20,
-        ),
-        iconTheme: const IconThemeData(
+  ThemeData darkTheme = ThemeData(
+    fontFamily: GoogleFonts.poppins().fontFamily,
+    appBarTheme: AppBarTheme(
+      backgroundColor: const Color(0xFF1B1B1B),
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        fontSize: 20,
+      ),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: const BorderSide(
           color: Colors.white,
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(
-            color: Colors.white,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(
-            color: Colors.white,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(
-            color: Colors.white,
-          ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: const BorderSide(
+          color: Colors.white,
         ),
       ),
-      scaffoldBackgroundColor: const Color(0xFF1B1B1B),
-      primaryColor: const Color.fromARGB(255, 212, 0, 0),
-      colorScheme: ColorScheme.fromSwatch(
-        brightness: Brightness.dark,
-        primarySwatch: createMaterialColor(const Color(0xFFD40000)),
-      ).copyWith(
-        secondary: Colors.grey, // Your secondary color
-        onSecondary: Colors.white, // Text or icon color on the secondary color
-      ));
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: const BorderSide(
+          color: Colors.white,
+        ),
+      ),
+    ),
+    scaffoldBackgroundColor: const Color(0xFF1B1B1B),
+    primaryColor: const Color(0xFF0079EB),
+    colorScheme: ColorScheme.fromSwatch(
+      brightness: Brightness.dark,
+      primarySwatch: createMaterialColor(const Color(0xFF0079EB)),
+    ).copyWith(
+      secondary: Colors.grey[700], // Slightly darker secondary for contrast
+      onSecondary: Colors.white,
+      onPrimary: Colors.white, // Text or icon color on the secondary color
+    ),
+  );
 }

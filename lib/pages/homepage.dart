@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:habithack/data/database.dart';
+import 'package:habithack/utils/theme/theme_Notifier.dart';
 import 'package:habithack/utils/widgets/dialogBox.dart';
 import 'package:habithack/utils/widgets/taskTile.dart';
 import 'package:habithack/utils/widgets/todayDetails.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -90,18 +92,6 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Center(
-            child: Text(
-              'Progress',
-              style: TextStyle(
-                fontFamily: "Poppins",
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => createNewTask(context),
           elevation: 0, // Pass context here
@@ -143,23 +133,6 @@ class _HomepageState extends State<Homepage> {
                   },
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                  print(db.tasksCompletedCount);
-                  print(db.completedTasksPerDay);
-                  // Calculate the sum of all the integer values in the map
-                  int sum = db.tasksCompletedCount.values
-                      .fold(0, (previous, current) => previous + current);
-
-                  // Output the sum
-                  print("Sum of the dataset values: $sum");
-                },
-                child: Text("debug",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.onSecondary,
-                    )),
-              )
             ],
           ),
         ));

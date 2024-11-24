@@ -15,18 +15,6 @@ class _DashbordPageState extends State<ProgressPage> {
     final TaskDatabase db = TaskDatabase();
     db.loadData();
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Center(
-          child: Text(
-            'Progress',
-            style: TextStyle(
-              fontFamily: "Poppins",
-              fontSize: 20,
-            ),
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Expanded(
           child: Row(
