@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:habithack/pages/homepage.dart';
 import 'package:habithack/pages/progressPage.dart';
@@ -45,11 +46,11 @@ class _MainDashboardState extends State<MainDashboard> {
           selectedIndex: selectedPage,
           onTabChange: onItemTapped,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          rippleColor: Theme.of(context).colorScheme.onSecondary,
+          rippleColor: Theme.of(context).colorScheme.onPrimary,
           hoverColor: Colors.grey[100]!,
           duration: const Duration(milliseconds: 400),
           tabBackgroundColor: Theme.of(context).primaryColor,
-          activeColor: Colors.grey[100]!,
+          activeColor: Theme.of(context).colorScheme.onPrimary,
           gap: 10,
           color: Theme.of(context).colorScheme.primary,
           tabs: [
@@ -58,7 +59,7 @@ class _MainDashboardState extends State<MainDashboard> {
               text: "Today",
               textStyle: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
             GButton(
@@ -66,7 +67,7 @@ class _MainDashboardState extends State<MainDashboard> {
               text: "Progress",
               textStyle: TextStyle(
                 fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ],

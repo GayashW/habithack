@@ -22,14 +22,15 @@ class ThemeDataModes {
   final ThemeData lightTheme = ThemeData(
     fontFamily: GoogleFonts.poppins().fontFamily,
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor:
+          const Color.fromARGB(255, 255, 255, 255), // Light background
       titleTextStyle: TextStyle(
+        color: Colors.black, // Black text for light background
         fontFamily: GoogleFonts.poppins().fontFamily,
-        color: Colors.black,
         fontSize: 20,
       ),
       iconTheme: const IconThemeData(
-        color: Colors.black,
+        color: Colors.black, // Black icons
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -52,19 +53,22 @@ class ThemeDataModes {
         ),
       ),
     ),
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Colors.white, // White background
+    primaryColor: const Color(0xFF0079EB), // Same red primary color
     colorScheme: ColorScheme.fromSwatch(
-      brightness: Brightness.light,
-      primarySwatch: Colors.deepPurple,
-      accentColor: Colors.amber,
+      brightness: Brightness.light, // Light theme
+      primarySwatch: createMaterialColor(const Color(0xFF0079EB)),
+    ).copyWith(
+      secondary: Colors.grey[700], // Slightly darker secondary for contrast
+      onSecondary: Colors.black,
+      onPrimary: Colors.white, // Black text or icon on the secondary color
     ),
-    primaryColor: Colors.deepPurple,
   );
 
   final ThemeData darkTheme = ThemeData(
       fontFamily: GoogleFonts.poppins().fontFamily,
       appBarTheme: AppBarTheme(
-        backgroundColor: const Color.fromARGB(255, 17, 17, 17),
+        backgroundColor: const Color(0xFF1B1B1B),
         titleTextStyle: TextStyle(
           color: Colors.white,
           fontFamily: GoogleFonts.poppins().fontFamily,

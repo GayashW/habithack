@@ -53,7 +53,11 @@ class MyDialogBox extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         20), // Adjust the value for roundness
                   ),
-                  child: Text("Cancel"),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
                 ),
                 MaterialButton(
                   padding:
@@ -66,7 +70,11 @@ class MyDialogBox extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                         20), // Adjust the value for roundness
                   ),
-                  child: Text("Save"),
+                  child: Text(
+                    "Save",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
                 )
               ],
             ),

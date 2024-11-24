@@ -74,68 +74,94 @@ class _HomepageState extends State<Homepage> {
       },
     );
   }
+  // appBar: AppBar(
+  //         automaticallyImplyLeading: false,
+  //         title: const Center(
+  //           child: Text(
+  //             'Progress',
+  //             style: TextStyle(
+  //               fontFamily: "Poppins",
+  //               fontSize: 20,
+  //             ),
+  //           ),
+  //         ),
+  //       ),
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      child: Scaffold(
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Center(
+            child: Text(
+              'Progress',
+              style: TextStyle(
+                fontFamily: "Poppins",
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => createNewTask(context),
           elevation: 0, // Pass context here
           child: const Icon(Icons.add),
         ),
-        body: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Datedetails(
-                    selectedDate: DateTime.now(),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Datedetails(
+                      selectedDate: DateTime.now(),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: db.tasksList.length,
-                itemBuilder: (context, i) {
-                  return TaskTile(
-                    taskName: db.tasksList[i][0],
-                    taskCompleted: db.tasksList[i][1],
-                    onChanged: (bool? newStatus) {
-                      if (newStatus != null) {
-                        checkboxClicked(
-                            i, newStatus); // Update task completion status
-                      }
-                    },
-                    deleteFunction: (BuildContext context) {
-                      deleteTask(i); // Delete task by passing the index
-                    },
-                  );
-                },
+                ],
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                print(db.tasksCompletedCount);
-                // Calculate the sum of all the integer values in the map
-                int sum = db.tasksCompletedCount.values
-                    .fold(0, (previous, current) => previous + current);
+              Expanded(
+                child: ListView.builder(
+                  itemCount: db.tasksList.length,
+                  itemBuilder: (context, i) {
+                    return TaskTile(
+                      taskName: db.tasksList[i][0],
+                      taskCompleted: db.tasksList[i][1],
+                      onChanged: (bool? newStatus) {
+                        if (newStatus != null) {
+                          checkboxClicked(
+                              i, newStatus); // Update task completion status
+                        }
+                      },
+                      deleteFunction: (BuildContext context) {
+                        deleteTask(i); // Delete task by passing the index
+                      },
+                    );
+                  },
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  print(db.tasksCompletedCount);
+                  print(db.completedTasksPerDay);
+                  // Calculate the sum of all the integer values in the map
+                  int sum = db.tasksCompletedCount.values
+                      .fold(0, (previous, current) => previous + current);
 
-                // Output the sum
-                print("Sum of the dataset values: $sum");
-              },
-              child: Text("debug",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  )),
-            )
-          ],
-        ),
-      ),
-    );
+                  // Output the sum
+                  print("Sum of the dataset values: $sum");
+                },
+                child: Text("debug",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    )),
+              )
+            ],
+          ),
+        ));
   }
 }

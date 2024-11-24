@@ -45,7 +45,7 @@ class Datedetails extends StatelessWidget {
       width: 80,
       height: 120,
       decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor.withOpacity(0.6),
+          color: Theme.of(context).primaryColor.withOpacity(0.2),
           borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Center(
         child: Column(

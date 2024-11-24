@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:habithack/pages/detailsPage.dart';
 
 class CustomHeatMap extends StatelessWidget {
   final Map<DateTime, int> datasets;
@@ -19,25 +20,24 @@ class CustomHeatMap extends StatelessWidget {
     // Align the current date to be in the 4th column (Wednesday)
     switch (dayOfWeek) {
       case 0: // Sunday
-        daysToSubtract = 21; // 3 weeks + 3 days
-        break;
+        daysToSubtract = 21; // 3 weeks
       case 1: // Monday
-        daysToSubtract = 22; // 3 weeks + 4 days
+        daysToSubtract = 22; // 3 weeks + 1 days
         break;
       case 2: // Tuesday
-        daysToSubtract = 23; // 3 weeks + 5 days
+        daysToSubtract = 23; // 3 weeks + 2 days
         break;
       case 3: // Wednesday
-        daysToSubtract = 24; // 3 weeks exactly
+        daysToSubtract = 24; // 3 weeks + 3 days
         break;
       case 4: // Thursday
-        daysToSubtract = 25; // 3 weeks + 1 day
+        daysToSubtract = 25; // 3 weeks + 4 day
         break;
       case 5: // Friday
-        daysToSubtract = 26; // 3 weeks + 2 days
+        daysToSubtract = 26; // 3 weeks + 5 days
         break;
       case 6: // Saturday
-        daysToSubtract = 27; // 3 weeks + 3 days
+        daysToSubtract = 27; // 3 weeks + 6 days
         break;
     }
 
@@ -75,14 +75,15 @@ class CustomHeatMap extends StatelessWidget {
         5: Theme.of(context).primaryColor.withAlpha(200),
         6: Theme.of(context).primaryColor.withAlpha(255),
       },
-      // onClick: (value) {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => DetailsPage(selectedDate: value),
-      //     ),
-      //   );
-      // },
+      onClick: (value) {
+        print(value);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPage(selectedDate: value),
+          ),
+        );
+      },
     );
   }
 }
