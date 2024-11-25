@@ -12,13 +12,11 @@ class TaskDatabase {
   // Create initial data
   void createInitialData() {
     tasksList = [
-      ["Make Exercise", true],
+      ["Make Exercise", false],
       ["Do Workout", false],
     ];
     completedTasksPerDay = {};
-    tasksCompletedCount = {
-      {DateTime(2024, 11, 1): 1},
-    } as Map<DateTime, int>;
+    tasksCompletedCount = {};
   }
 
   // Load data from database
